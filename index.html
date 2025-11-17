@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smile RP PD • Made by Alex Murphy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black-white: #ffffff;
+            --bcso: #506234;
+            --sast: #90877c;
+            --bg: #0a0d14;
+        }
+        body {
+            margin: 0; padding: 0; min-height: 100vh;
+            background: radial-gradient(circle at center, #11151f 0%, var(--bg) 80%);
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            display: flex; flex-direction: column; align-items: center;
+            position: relative; overflow-x: hidden;
+        }
+        .watermark-logo {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90vw; max-width: 1200px;
+            opacity: 0.08; pointer-events: none; z-index: 1;
+            filter: drop-shadow(0 0 30px rgba(255,255,255,0.1));
+            animation: subtlePulse 20s ease-in-out infinite;
+        }
+        @keyframes subtlePulse { 0%,100% { opacity: 0.08; } 50% { opacity: 0.12; } }
+
+        header, .tree-container, footer { position: relative; z-index: 10; }
+
+        header { text-align: center; padding: 40px 20px; width: 100%; background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent); }
+        h1 { margin: 0; font-size: 5.5rem; font-weight: 900; background: linear-gradient(to right, #ffffff, #cccccc, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 40px rgba(255,255,255,0.5); letter-spacing: 6px; font-family: 'Rajdhani', sans-serif; }
+        .subtitle { font-size: 1.7rem; margin-top: 12px; color: #cccccc; }
+
+        .tree-container { padding: 80px 20px 120px; width: 100%; max-width: 2200px; display: flex; flex-direction: column; align-items: center; gap: 100px; }
+        .level { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; position: relative; }
+        .level::before { content: ''; position: absolute; top: -70px; left: 50%; transform: translateX(-50%); width: 4px; height: 70px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3)); }
+        .level:first-child::before { display: none; }
+
+        .member { text-align: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
+        .member:hover { transform: translateY(-20px) scale(1.08); z-index: 10; }
+
+        .hex { width: 170px; height: 170px; clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%); overflow: hidden; background: #000; margin: 0 auto; }
+        .hex.lspd   { border: 7px solid white; box-shadow: 0 0 50px rgba(255,255,255,1); }
+        .hex.bcso   { border: 7px solid #506234; box-shadow: 0 0 50px rgba(80,98,52,1.2); }
+        .hex.sast   { border: 7px solid #90877c; box-shadow: 0 0 50px rgba(144,135,124,1); }
+        .hex.officer { border: 6px solid white; box-shadow: 0 0 30px rgba(255,255,255,0.7); }
+        .hex img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+        .member:hover .hex img { transform: scale(1.15); }
+
+        .hex.live::after {
+            content: "LIVE"; position: absolute; top: 12px; right: 12px; background: #ff0000; color: white; padding: 8px 16px; border-radius: 20px;
+            font-family: 'Rajdhani', sans-serif; font-weight: bold; font-size: 0.8rem; animation: pulse 1.5s infinite; box-shadow: 0 0 25px #ff0000; z-index: 5;
+        }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+        .rank-badge { margin-top: 18px; padding: 10px 24px; border-radius: 30px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 2px; border: 3px solid white; box-shadow: 0 0 25px rgba(255,255,255,0.6); }
+        .rank-badge.lspd { background: #111; color: white; }
+        .rank-badge.bcso { background: #506234; color: white; }
+        .rank-badge.sast { background: #90877c; color: white; }
+        .rank-badge.officer { background: #111; color: white; }
+
+        .name { margin-top: 14px; font-weight: 700; font-size: 1.2rem; color: white; text-shadow: 0 0 12px rgba(255,255,255,0.5); }
+
+        .platform-btn { margin-top: 12px; padding: 12px 24px; border-radius: 30px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.95rem; text-decoration: none; display: inline-block; transition: all 0.3s; }
+        .platform-btn.twitch { background: linear-gradient(135deg, #9146ff, #a970ff); color: white; }
+        .platform-btn.kick   { background: #53fc18; color: black; }
+        .platform-btn:hover { transform: translateY(-4px) scale(1.06); }
+
+        .upload-btn { margin-top: 8px; padding: 6px 12px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; font-size: 0.7rem; cursor: pointer; transition: all 0.3s; }
+        .upload-btn:hover { background: rgba(255,255,255,0.3); }
+
+        footer { margin-top: auto; padding: 40px; text-align: center; opacity: 0.8; color: #aaa; }
+        .christmas-logo { position: fixed; bottom: 25px; right: 25px; width: 180px; opacity: 0.9; pointer-events: none; z-index: 100; animation: float 6s ease-in-out infinite; filter: drop-shadow(0 0 20px white); }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        @media (max-width: 768px) { .hex { width: 130px; height: 130px; } .level { gap: 30px; } .tree-container { gap: 70px; } }
+    </style>
+</head>
+<body>
+
+    <img src="Smile_Logo.png" alt="Smile RP PD Watermark" class="watermark-logo">
+
+    <header>
+        <h1>SMILE RP PD</h1>
+        <p class="subtitle">ACTIVE STREAMERS • #SMILERPONTOP</p>
+    </header>
+
+    <div class="tree-container">
+
+        <!-- TOP TIER -->
+        <div class="level">
+            <div class="member" data-twitch="agentfpstv" data-id="gill_edwards">
+                <div class="hex bcso"><img src="" alt="Gill Edwards" loading="lazy"></div>
+                <div class="rank-badge bcso">SHERIFF</div>
+                <div class="name">Gill Edwards</div>
+                <a href="https://twitch.tv/agentfpstv" target="_blank" class="platform-btn twitch">TWITCH</a>
+                <label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label>
+            </div>
+
+            <div class="member" data-twitch="kekosix" data-id="jesse_martinez">
+                <div class="hex lspd"><img src="" alt="Jesse Martinez" loading="lazy"></div>
+                <div class="rank-badge lspd">LSPD CHIEF</div>
+                <div class="name">Jesse Martinez</div>
+                <a href="https://twitch.tv/kekosix" target="_blank" class="platform-btn twitch">TWITCH</a>
+                <label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label>
+            </div>
+
+            <div class="member" data-twitch="samanticsx" data-id="samuel_maeson">
+                <div class="hex sast"><img src="" alt="Samuel Maeson" loading="lazy"></div>
+                <div class="rank-badge sast">COLONEL</div>
+                <div class="name">Samuel Maeson</div>
+                <a href="https://twitch.tv/samanticsx" target="_blank" class="platform-btn twitch">TWITCH</a>
+                <label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label>
+            </div>
+        </div>
+
+        <!-- CAPTAINS ROW -->
+        <div class="level">
+            <div class="member" data-twitch="nimcodon" data-id="raven_bloom"><div class="hex lspd"><img src="" alt="Raven Bloom" loading="lazy"></div><div class="rank-badge lspd">LSPD CAPTAIN</div><div class="name">Raven Bloom</div><a href="https://twitch.tv/nimcodon" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="gusthebus_72" data-id="gus_ramirez"><div class="hex lspd"><img src="" alt="Gus Ramirez" loading="lazy"></div><div class="rank-badge lspd">LSPD CAPTAIN</div><div class="name">Gus Ramirez</div><a href="https://twitch.tv/gusthebus_72" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="gigthanks" data-id="kjersti_viking"><div class="hex bcso"><img src="" alt="Kjersti Viking" loading="lazy"></div><div class="rank-badge bcso">BCSO CAPTAIN</div><div class="name">Kjersti Viking</div><a href="https://twitch.tv/gigthanks" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="officervdm" data-id="vee_deeham"><div class="hex sast"><img src="" alt="Vee DeeHam" loading="lazy"></div><div class="rank-badge sast">LT COLONEL</div><div class="name">Vee DeeHam</div><a href="https://twitch.tv/officervdm" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+        </div>
+
+        <!-- LIEUTENANTS -->
+        <div class="level">
+            <div class="member" data-twitch="tio_chubbs" data-id="damian_rodriguez"><div class="hex lspd"><img src="" alt="Damian Rodriguez" loading="lazy"></div><div class="rank-badge lspd">LIEUTENANT</div><div class="name">Damian Rodriguez</div><a href="https://twitch.tv/tio_chubbs" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="abxero" data-id="alex_murphy"><div class="hex lspd"><img src="" alt="Alex Murphy" loading="lazy"></div><div class="rank-badge lspd">LIEUTENANT</div><div class="name">Alex Murphy</div><a href="https://twitch.tv/abxero" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="cmbreezy89" data-id="chris_breezy"><div class="hex lspd"><img src="" alt="Chris Breezy" loading="lazy"></div><div class="rank-badge lspd">LIEUTENANT</div><div class="name">Chris Breezy</div><a href="https://twitch.tv/cmbreezy89" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+        </div>
+
+        <!-- ALL OFFICERS -->
+        <div class="level">
+            <div class="member" data-twitch="flowerfam" data-id="flower_boy"><div class="hex officer"><img src="" alt="Flower Boy" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Flower Boy</div><a href="https://twitch.tv/flowerfam" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="reel_nautii" data-id="austin_tate"><div class="hex officer"><img src="" alt="Austin Tate" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Austin Tate</div><a href="https://twitch.tv/reel_nautii" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="smudg3_" data-id="boaby_mctavish"><div class="hex officer"><img src="" alt="Boaby Mctavish" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Boaby Mctavish</div><a href="https://twitch.tv/smudg3_" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="hotch94" data-id="tony_r"><div class="hex officer"><img src="" alt="Tony R" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Tony R</div><a href="https://twitch.tv/hotch94" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="jaxxplaystv" data-id="jonathan_crane"><div class="hex officer"><img src="" alt="Jonathan Crane" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Jonathan Crane</div><a href="https://twitch.tv/jaxxplaystv" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="flawzz" data-platform="kick" data-id="clayton_biggums"><div class="hex officer"><img src="" alt="Clayton Biggums" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Clayton Biggums</div><a href="https://kick.com/flawzz" target="_blank" class="platform-btn kick">KICK</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="iivmagicvii" data-id="daniel_glazed"><div class="hex officer"><img src="" alt="Daniel Glazed" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Daniel Glazed</div><a href="https://twitch.tv/iivmagicvii" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="stoutie" data-id="colt_davis"><div class="hex officer"><img src="" alt="Colt Davis" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Colt Davis</div><a href="https://twitch.tv/stoutie" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="major_peacock1" data-id="drew_peacock"><div class="hex officer"><img src="" alt="Drew Peacock" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Drew Peacock</div><a href="https://twitch.tv/major_peacock1" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="mothernala" data-id="nala_sinclair"><div class="hex officer"><img src="" alt="Nala Sinclair" loading="lazy"></div><div class="rank-badge officer">CID</div><div class="name">Nala Sinclair</div><a href="https://twitch.tv/mothernala" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="razcul78" data-id="dylan_whed"><div class="hex officer"><img src="" alt="Dylan Whed" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Dylan Whed</div><a href="https://twitch.tv/razcul78" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="5oley" data-id="lana_tjuggseson"><div class="hex officer"><img src="" alt="Lana Tjuggseson" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Lana Tjuggseson</div><a href="https://twitch.tv/5oley" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="lilmfpanda" data-id="harlow_reeves"><div class="hex officer"><img src="" alt="Harlow Reeves" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Harlow Reeves</div><a href="https://twitch.tv/lilmfpanda" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="RonzelTV" data-id="richard_hartigan"><div class="hex officer"><img src="" alt="Richard Hartigan" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Richard Hartigan</div><a href="https://twitch.tv/RonzelTV" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="Jaceyyy22" data-id="rugus_downey"><div class="hex officer"><img src="" alt="Rugus Downey" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Rugus Downey</div><a href="https://twitch.tv/Jaceyyy22" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="darth_father" data-id="willie_b_hardigan"><div class="hex officer"><img src="" alt="Willie B Hardigan" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Willie B Hardigan</div><a href="https://twitch.tv/darth_father" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="linebvcker" data-id="jeremy_gamble"><div class="hex officer"><img src="" alt="Jeremy Gamble" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Jeremy Gamble</div><a href="https://twitch.tv/linebvcker" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="jmannfzero" data-id="jaxson_jefferson"><div class="hex officer"><img src="" alt="Jaxson Jefferson" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Jaxson Jefferson</div><a href="https://twitch.tv/jmannfzero" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="jayzer10" data-id="joshua_daggler"><div class="hex officer"><img src="" alt="Joshua Daggler" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Joshua Daggler</div><a href="https://twitch.tv/jayzer10" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="dgthe99" data-id="the_big_man"><div class="hex officer"><img src="" alt="THE BIG MAN" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">THE BIG MAN</div><a href="https://twitch.tv/dgthe99" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="x_exiled_x" data-id="mick_jennings"><div class="hex officer"><img src="" alt="Mick Jennings" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Mick Jennings</div><a href="https://twitch.tv/x_exiled_x" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="madskadie" data-id="raya_walker"><div class="hex officer"><img src="" alt="Raya Walker" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Raya Walker</div><a href="https://twitch.tv/madskadie" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="guncollectornc" data-id="william_davis"><div class="hex officer"><img src="" alt="William Davis" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">William Davis</div><a href="https://twitch.tv/guncollectornc" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="not1mmortal" data-id="matteo_denaro"><div class="hex officer"><img src="" alt="Matteo Denaro" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Matteo Denaro</div><a href="https://twitch.tv/not1mmortal" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="alex13_fps" data-id="alex_smith"><div class="hex officer"><img src="" alt="Alex Smith" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Alex Smith</div><a href="https://twitch.tv/alex13_fps" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="officerscarn" data-id="michel_scarn"><div class="hex officer"><img src="" alt="Michel Scarn" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Michel Scarn</div><a href="https://twitch.tv/officerscarn" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="bestsh0ts" data-id="jack_dammitson"><div class="hex officer"><img src="" alt="Jack Dammitson" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Jack Dammitson</div><a href="https://twitch.tv/bestsh0ts" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="cnr_mxz" data-id="nicholas_davis"><div class="hex officer"><img src="" alt="Nicholas Davis" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Nicholas Davis</div><a href="https://twitch.tv/cnr_mxz" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="theinvincibleking" data-id="jake_low"><div class="hex officer"><img src="" alt="Jake Low" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Jake Low</div><a href="https://twitch.tv/theinvincibleking" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+            <div class="member" data-twitch="senpaixsauce" data-id="rodderick_richardson"><div class="hex officer"><img src="" alt="Rodderick Richardson" loading="lazy"></div><div class="rank-badge officer">OFFICER</div><div class="name">Rodderick Richardson</div><a href="https://twitch.tv/senpaixsauce" target="_blank" class="platform-btn twitch">TWITCH</a><label class="upload-btn">Change Photo<input type="file" accept="image/*" style="display:none"></label></div>
+        </div>
+    </div>
+
+    <footer>© 2025 Smile RP • Made by Alex Murphy</footer>
+    <img src="Smile_Christmas-removebg-preview.png" alt="Christmas Logo" class="christmas-logo">
+
+    <script>
+        // Load saved custom photos
+        document.querySelectorAll('.member').forEach(m => {
+            const saved = localStorage.getItem('pd-photo-' + m.dataset.id);
+            if (saved) m.querySelector('img').src = saved;
+        });
+
+        // Photo upload handler
+        document.querySelectorAll('.upload-btn input').forEach(input => {
+            input.addEventListener('change', function(e) {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = this.closest('.member').querySelector('img');
+                        img.src = e.target.result;
+                        localStorage.setItem('pd-photo-' + this.closest('.member').dataset.id, e.target.result);
+                    }.bind(this);
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+
+        // Live detection with priority: Live > Custom > Avatar > Default
+        async function updateLiveStatus() {
+            for (const m of document.querySelectorAll('.member[data-twitch]')) {
+                const username = m.dataset.twitch;
+                const platform = m.dataset.platform || 'twitch';
+                const img = m.querySelector('img');
+                const hex = m.querySelector('.hex');
+                const custom = localStorage.getItem('pd-photo-' + m.dataset.id);
+
+                let isLive = false, liveUrl = '';
+
+                try {
+                    if (platform === 'twitch') {
+                        const [uptime, avatar] = await Promise.all([
+                            fetch(`https://decapi.me/twitch/uptime/${username}`, {cache: 'no-store'}).then(r => r.text()),
+                            fetch(`https://decapi.me/twitch/avatar/${username}`, {cache: 'no-store'}).then(r => r.text())
+                        ]);
+                        isLive = uptime && !uptime.includes('offline') && !uptime.includes('not found');
+                        liveUrl = isLive ? `https://static-cdn.jtvnw.net/previews-ttv/live_user_${username}-640x360.jpg?t=${Date.now()}` 
+                                        : avatar.replace(/-\d+x\d+\./, '-300x300.');
+                    } else if (platform === 'kick') {
+                        const data = await fetch(`https://kick.com/api/v2/channels/${username}`).then(r => r.json());
+                        isLive = !!data.livestream;
+                        liveUrl = isLive ? `https://kick.com/thumbnails/${username}/live.jpg?t=${Date.now()}` : (data.profile_pic || '');
+                    }
+
+                    if (isLive) img.src = liveUrl;
+                    else if (custom) img.src = custom;
+                    else img.src = liveUrl || 'https://static-cdn.jtvnw.net/ttv-static/404_avatar.jpg';
+
+                    hex.classList.toggle('live', isLive);
+                } catch (e) {
+                    console.warn('Failed:', username);
+                    if (!custom) img.src = 'https://static-cdn.jtvnw.net/ttv-static/404_avatar.jpg';
+                }
+            }
+        }
+
+        updateLiveStatus();
+        setInterval(updateLiveStatus, 30000);
+    </script>
+</body>
+</html>
