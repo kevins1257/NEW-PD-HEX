@@ -48,38 +48,41 @@
             width: 170px; height: 170px;
             clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
             overflow: hidden; background: #000; margin: 0 auto; position: relative;
-            transition: all 0.4s ease;
+            transition: all 0.4s ease; border: 7px solid transparent;
         }
-        .hex.lspd   { border: 7px solid white; box-shadow: 0 0 50px rgba(255,255,255,1); }
-        .hex.bcso   { border: 7px solid #506234; box-shadow: 0 0 50px rgba(80,98,52,1.2); }
-        .hex.sast   { border: 7px solid #90877c; box-shadow: 0 0 50px rgba(144,135,124,1); }
+        .hex.lspd   { border-color: white; box-shadow: 0 0 50px rgba(255,255,255,1); }
+        .hex.bcso   { border-color: #506234; box-shadow: 0 0 50px rgba(80,98,52,1.2); }
+        .hex.sast   { border-color: #90877c; box-shadow: 0 0 50px rgba(144,135,124,1); }
         .hex.officer { border: 6px solid white; box-shadow: 0 0 30px rgba(255,255,255,0.7); }
 
-        /* Red border when live */
         .hex.live {
             border-color: #ff0000 !important;
-            box-shadow: 0 0 70px rgba(255,0,0,0.9) !important;
+            box-shadow: 0 0 80px rgba(255,0,0,1) !important;
+            animation: livePulse 2s infinite;
+        }
+        @keyframes livePulse {
+            0%, 100% { box-shadow: 0 0 80px rgba(255,0,0,1); }
+            50% { box-shadow: 0 0 100px rgba(255,0,0,1.4); }
         }
 
         .hex img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
         .member:hover .hex img { transform: scale(1.15); }
 
-        /* Centered LIVE button */
         .live-center {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             background: #ff0000;
             color: white;
-            padding: 8px 24px;
+            padding: 10px 28px;
             border-radius: 30px;
             font-family: 'Rajdhani', sans-serif;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             z-index: 20;
-            box-shadow: 0 0 30px rgba(255,0,0,0.9);
+            box-shadow: 0 0 40px rgba(255,0,0,1);
             opacity: 0;
             transition: opacity 0.4s ease;
             pointer-events: none;
@@ -103,7 +106,12 @@
         .christmas-logo { position: fixed; bottom: 25px; right: 25px; width: 180px; opacity: 0.9; pointer-events: none; z-index: 100; animation: float 6s ease-in-out infinite; filter: drop-shadow(0 0 20px white); }
         @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        @media (max-width: 768px) { .hex { width: 130px; height: 130px; } .live-center { font-size: 0.8rem; padding: 6px 16px; } .level { gap: 30px; } .tree-container { gap: 70px; } }
+        @media (max-width: 768px) { 
+            .hex { width: 130px; height: 130px; } 
+            .live-center { font-size: 0.9rem; padding: 6px 18px; } 
+            .level { gap: 40px; } 
+            .tree-container { gap: 70px; } 
+        }
     </style>
 </head>
 <body>
@@ -115,19 +123,18 @@
         <p class="subtitle">ACTIVE STREAMERS • #SMILERPONTOP</p>
     </header>
 
-   
     <div class="tree-container">
 
         <!-- OWNER & CO-OWNER LEVEL -->
         <div class="level">
-            <div class="member" data-twitch="dgthe99" data-id="GUS_DGTHE99" data-custom-pfp="https://i.imgur.com/JRuQags.png">
+            <div class="member" data-twitch="dgthe99" data-custom-pfp="https://i.imgur.com/JRuQags.png">
                 <div class="hex lspd"><span class="live-center">LIVE</span><img src="" alt="THE BIG MAN" loading="lazy"></div>
                 <div class="rank-badge lspd">OWNER</div>
                 <div class="name">GUS DGTHE99</div>
                 <a href="https://twitch.tv/dgthe99" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
 
-            <div class="member" data-twitch="guncollectornc" data-id="william_davis" data-custom-pfp="https://i.imgur.com/FWv2nFg.png">
+            <div class="member" data-twitch="guncollectornc" data-custom-pfp="https://i.imgur.com/FWv2nFg.png">
                 <div class="hex lspd"><span class="live-center">LIVE</span><img src="" alt="William Davis" loading="lazy"></div>
                 <div class="rank-badge lspd">CO-OWNER</div>
                 <div class="name">William Davis</div>
@@ -137,21 +144,21 @@
 
         <!-- TOP COMMAND -->
         <div class="level">
-            <div class="member" data-twitch="agentfpstv" data-id="Gill_Edwards" data-custom-pfp="https://i.imgur.com/DwlbT6x.png">
+            <div class="member" data-twitch="agentfpstv" data-custom-pfp="https://i.imgur.com/DwlbT6x.png">
                 <div class="hex bcso"><span class="live-center">LIVE</span><img src="" alt="Gill Edwards" loading="lazy"></div>
                 <div class="rank-badge bcso">SHERIFF</div>
                 <div class="name">Gill Edwards</div>
                 <a href="https://twitch.tv/agentfpstv" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
 
-            <div class="member" data-twitch="kekosix" data-id="jesse_martinez" data-custom-pfp="https://i.imgur.com/Ay7NIej.png">
+            <div class="member" data-twitch="kekosix" data-custom-pfp="https://i.imgur.com/Ay7NIej.png">
                 <div class="hex lspd"><span class="live-center">LIVE</span><img src="" alt="Jesse Martinez" loading="lazy"></div>
                 <div class="rank-badge lspd">LSPD CHIEF</div>
                 <div class="name">Jesse Martinez</div>
                 <a href="https://twitch.tv/kekosix" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
 
-            <div class="member" data-twitch="samanticsx" data-id="Samuel_Maeson" data-custom-pfp="https://i.imgur.com/IKwssZo.png">
+            <div class="member" data-twitch="samanticsx" data-custom-pfp="https://i.imgur.com/IKwssZo.png">
                 <div class="hex sast"><span class="live-center">LIVE</span><img src="" alt="Samuel Maeson" loading="lazy"></div>
                 <div class="rank-badge sast">COLONEL</div>
                 <div class="name">Samuel Maeson</div>
@@ -161,25 +168,25 @@
 
         <!-- CAPTAINS ROW -->
         <div class="level">
-            <div class="member" data-twitch="nimcodon" data-id="raven_bloom" data-custom-pfp="https://i.imgur.com/tiFt0hs.png">
+            <div class="member" data-twitch="nimcodon" data-custom-pfp="https://i.imgur.com/tiFt0hs.png">
                 <div class="hex lspd"><span class="live-center">LIVE</span><img src="" alt="Raven Bloom" loading="lazy"></div>
                 <div class="rank-badge lspd">LSPD CAPTAIN</div>
                 <div class="name">Raven Bloom</div>
                 <a href="https://twitch.tv/nimcodon" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
-            <div class="member" data-twitch="gusthebus_72" data-id="gus_ramirez" data-custom-pfp="https://i.imgur.com/jdZyzoH.png">
+            <div class="member" data-twitch="gusthebus_72" data-custom-pfp="https://i.imgur.com/jdZyzoH.png">
                 <div class="hex lspd"><span class="live-center">LIVE</span><img src="" alt="Gus Ramirez" loading="lazy"></div>
                 <div class="rank-badge lspd">LSPD CAPTAIN</div>
                 <div class="name">Gus Ramirez</div>
                 <a href="https://twitch.tv/gusthebus_72" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
-            <div class="member" data-twitch="gigthanks" data-id="Kjersti_Viking" data-custom-pfp="https://i.imgur.com/XZWWqxx.png">
+            <div class="member" data-twitch="gigthanks" data-custom-pfp="https://i.imgur.com/XZWWqxx.png">
                 <div class="hex bcso"><span class="live-center">LIVE</span><img src="" alt="Kjersti Viking" loading="lazy"></div>
                 <div class="rank-badge bcso">BCSO CAPTAIN</div>
                 <div class="name">Kjersti Viking</div>
                 <a href="https://twitch.tv/gigthanks" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
-            <div class="member" data-twitch="officervdm" data-id="vee_deeham">
+            <div class="member" data-twitch="officervdm">
                 <div class="hex sast"><span class="live-center">LIVE</span><img src="" alt="Vee DeeHam" loading="lazy"></div>
                 <div class="rank-badge sast">LT COLONEL</div>
                 <div class="name">Vee DeeHam</div>
@@ -189,19 +196,19 @@
 
         <!-- LIEUTENANTS -->
         <div class="level">
-            <div class="member" data-twitch="tio_chubbs" data-id="damian_rodriguez" data-custom-pfp="https://i.imgur.com/ik5iBIj.png">
+            <div class="member" data-twitch="tio_chubbs" data-custom-pfp="https://i.imgur.com/ik5iBIj.png">
                 <div class="hex lspd"><span class="live-center">LIVE</span><img src="" alt="Damian Rodriguez" loading="lazy"></div>
                 <div class="rank-badge lspd">LIEUTENANT</div>
                 <div class="name">Damian Rodriguez</div>
                 <a href="https://twitch.tv/tio_chubbs" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
-            <div class="member" data-twitch="abxero" data-id="alex_murphy" data-custom-pfp="https://i.imgur.com/7oDOfNU.png">
+            <div class="member" data-twitch="abxero" data-custom-pfp="https://i.imgur.com/7oDOfNU.png">
                 <div class="hex lspd"><span class="live-center">LIVE</span><img src="" alt="Alex Murphy" loading="lazy"></div>
                 <div class="rank-badge lspd">LIEUTENANT</div>
                 <div class="name">Alex Murphy</div>
                 <a href="https://twitch.tv/abxero" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
-            <div class="member" data-twitch="cmbreezy89" data-id="chris_breezy">
+            <div class="member" data-twitch="cmbreezy89">
                 <div class="hex lspd"><span class="live-center">LIVE</span><img src="" alt="Chris Breezy" loading="lazy"></div>
                 <div class="rank-badge lspd">LIEUTENANT</div>
                 <div class="name">Chris Breezy</div>
@@ -209,59 +216,58 @@
             </div>
         </div>
 
-        <!-- ALL OFFICERS -->
+        <!-- ALL OFFICERS (EVERY SINGLE ONE – NO ONE LEFT OUT) -->
         <div class="level">
-            <div class="member" data-twitch="madskadie" data-id="raya_walker" data-custom-pfp="https://i.imgur.com/8EiJQ4b.png">
+            <div class="member" data-twitch="madskadie" data-custom-pfp="https://i.imgur.com/8EiJQ4b.png">
                 <div class="hex officer"><span class="live-center">LIVE</span><img src="" alt="Raya Walker" loading="lazy"></div>
                 <div class="rank-badge officer">FIB</div>
                 <div class="name">Raya Walker</div>
                 <a href="https://twitch.tv/madskadie" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
 
-            <div class="member" data-twitch="cnr_mxz" data-id="Nicholas_Davis" data-custom-pfp="https://i.imgur.com/ye1qo3R.png">
+            <div class="member" data-twitch="cnr_mxz" data-custom-pfp="https://i.imgur.com/ye1qo3R.png">
                 <div class="hex officer"><span class="live-center">LIVE</span><img src="" alt="Nicholas Davis" loading="lazy"></div>
                 <div class="rank-badge officer">SENIOR OFFICER</div>
                 <div class="name">Nicholas Davis</div>
                 <a href="https://twitch.tv/cnr_mxz" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
-            
-            <div class="member" data-twitch="razcul78" data-id="Dylan_Whed" data-custom-pfp="https://i.imgur.com/YymmWvw.png">
+
+            <div class="member" data-twitch="razcul78" data-custom-pfp="https://i.imgur.com/YymmWvw.png">
                 <div class="hex officer"><span class="live-center">LIVE</span><img src="" alt="Dylan Whed" loading="lazy"></div>
                 <div class="rank-badge officer">OFFICER</div>
                 <div class="name">Dylan Whed</div>
                 <a href="https://twitch.tv/razcul78" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
-            <div class="member" data-twitch="5oley" data-id="lana_tjuggseson">
+            <div class="member" data-twitch="5oley">
                 <div class="hex officer"><span class="live-center">LIVE</span><img src="" alt="Lana Tjuggseson" loading="lazy"></div>
                 <div class="rank-badge officer">OFFICER</div>
                 <div class="name">Lana Tjuggseson</div>
                 <a href="https://twitch.tv/5oley" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
-            <div class="member" data-twitch="RonzelTV" data-id="richard_hartigan" data-custom-pfp="https://i.imgur.com/uKau4V3.png">
+            <div class="member" data-twitch="RonzelTV" data-custom-pfp="https://i.imgur.com/uKau4V3.png">
                 <div class="hex officer"><span class="live-center">LIVE</span><img src="" alt="Richard Hartigan" loading="lazy"></div>
                 <div class="rank-badge officer">OFFICER</div>
                 <div class="name">Richard Hartigan</div>
                 <a href="https://twitch.tv/RonzelTV" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
-            <div class="member" data-twitch="darth_father" data-id="Willie_B_Hardigan" data-custom-pfp="https://i.imgur.com/bocsMZb.png">
+            <div class="member" data-twitch="darth_father" data-custom-pfp="https://i.imgur.com/bocsMZb.png">
                 <div class="hex officer"><span class="live-center">LIVE</span><img src="" alt="Willie B Hardigan" loading="lazy"></div>
                 <div class="rank-badge officer">OFFICER</div>
                 <div class="name">Willie B Hardigan</div>
                 <a href="https://twitch.tv/darth_father" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
-            <div class="member" data-twitch="officerscarn" data-id="michel_scarn" data-custom-pfp="https://i.imgur.com/Yz5vBFW.png">
+            <div class="member" data-twitch="officerscarn" data-custom-pfp="https://i.imgur.com/Yz5vBFW.png">
                 <div class="hex officer"><span class="live-center">LIVE</span><img src="" alt="Michel Scarn" loading="lazy"></div>
                 <div class="rank-badge officer">OFFICER</div>
                 <div class="name">Michel Scarn</div>
                 <a href="https://twitch.tv/officerscarn" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
-            <div class="member" data-twitch="bestsh0ts" data-id="Jack_Dammitson" data-custom-pfp="https://i.imgur.com/1QwgbeD.png">
+            <div class="member" data-twitch="bestsh0ts" data-custom-pfp="https://i.imgur.com/1QwgbeD.png">
                 <div class="hex officer"><span class="live-center">LIVE</span><img src="" alt="Jack Dammitson" loading="lazy"></div>
                 <div class="rank-badge officer">OFFICER</div>
                 <div class="name">Jack Dammitson</div>
                 <a href="https://twitch.tv/bestsh0ts" target="_blank" class="platform-btn twitch">TWITCH</a>
             </div>
-           
         </div>
     </div>
 
@@ -269,54 +275,67 @@
     <img src="Smile_Christmas-removebg-preview.png" alt="Christmas Logo" class="christmas-logo">
 
     <script>
-        async function updateAvatarsAndLiveStatus() {
+        async function isKickLive(username) {
+            try {
+                const res = await fetch(`https://kick.com/api/v1/channels/${username}`);
+                if (!res.ok) return false;
+                const data = await res.json();
+                return data.livestream !== null;
+            } catch (e) { return false; }
+        }
+
+        async function updateAll() {
             const levels = document.querySelectorAll('.level');
 
             for (const level of levels) {
                 const members = Array.from(level.querySelectorAll('.member[data-twitch]'));
-                const liveMembers = [];
-                const offlineMembers = [];
 
-                for (const m of members) {
-                    const username = m.dataset.twitch;
-                    const platform = m.dataset.platform || 'twitch';
-                    const img = m.querySelector('img');
-                    const hex = m.querySelector('.hex');
-                    let isLive = false;
+                const results = await Promise.all(members.map(async (member) => {
+                    const twitch = member.dataset.twitch.toLowerCase();
+                    const img = member.querySelector('img');
+                    const hex = member.querySelector('.hex');
 
-                    if (m.dataset.customPfp) {
-                        img.src = m.dataset.customPfp;
-                    } else {
+                    // Custom PFP priority
+                    if (member.dataset.customPfp) {
+                        img.src = member.dataset.customPfp;
+                    }
+
+                    let live = false;
+
+                    // Twitch check
+                    try {
+                        const uptime = await fetch(`https://decapi.me/twitch/uptime/${twitch}`, {cache: "no-store"}).then(r => r.text());
+                        live = uptime && !uptime.includes('offline') && !uptime.includes('not found');
+                    } catch(e) {}
+
+                    // Kick fallback
+                    if (!live) live = await isKickLive(twitch);
+
+                    // Avatar fallback if no custom
+                    if (!member.dataset.customPfp && !live) {
                         try {
-                            let avatarUrl = '';
-                            if (platform === 'twitch') {
-                                const [uptime, avatar] = await Promise.all([
-                                    fetch(`https://decapi.me/twitch/uptime/${username}`, {cache: 'no-store'}).then(r => r.text()),
-                                    fetch(`https://decapi.me/twitch/avatar/${username}`, {cache: 'no-store'}).then(r => r.text())
-                                ]);
-                                isLive = uptime && !uptime.includes('offline') && !uptime.includes('not found');
-                                avatarUrl = avatar || 'https://static-cdn.jtvnw.net/ttv-static/404_avatar.jpg';
-                            } else if (platform === 'kick') {
-                                const data = await fetch(`https://kick.com/api/v2/channels/${username}`).then(r => r.json());
-                                isLive = !!data.livestream;
-                                avatarUrl = data.profile_pic || '';
-                            }
-                            img.src = avatarUrl;
-                        } catch (e) {
+                            const avatar = await fetch(`https://decapi.me/twitch/avatar/${twitch}`, {cache: "no-store"}).then(r => r.text());
+                            img.src = avatar && !avatar.includes('404') ? avatar : 'https://static-cdn.jtvnw.net/ttv-static/404_avatar.jpg';
+                        } catch(e) {
                             img.src = 'https://static-cdn.jtvnw.net/ttv-static/404_avatar.jpg';
                         }
                     }
 
-                    hex.classList.toggle('live', isLive);
-                    (isLive ? liveMembers : offlineMembers).push(m);
-                }
+                    hex.classList.toggle('live', live);
+                    return { member, live };
+                }));
 
-                [...liveMembers, ...offlineMembers].forEach(member => level.appendChild(member));
+                // Sort: live first (left side)
+                const liveMembers = results.filter(r => r.live).map(r => r.member);
+                const offlineMembers = results.filter(r => !r.live).map(r => r.member);
+
+                liveMembers.forEach(m => level.appendChild(m));
+                offlineMembers.forEach(m => level.appendChild(m));
             }
         }
 
-        updateAvatarsAndLiveStatus();
-        setInterval(updateAvatarsAndLiveStatus, 60000);
+        updateAll();
+        setInterval(updateAll, 45000);
     </script>
 </body>
 </html>
